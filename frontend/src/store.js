@@ -63,4 +63,8 @@ export const useStore = create((set, get) => ({
       set({ theme: nextTheme });
       document.documentElement.setAttribute('data-theme', nextTheme);
     },
+    modalState: null,
+    modalData: { numNodes: 0, numEdges: 0 },
+    setModalState: (modalState) => set({ modalState }),
+    setModalData: (modalData) => set({ modalData }),
   }));

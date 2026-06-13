@@ -1,14 +1,12 @@
 // submit.js
 
-import { useState } from 'react';
 import { useStore } from './store';
-import { PipelineModal } from './components/PipelineModal';
 
 export const SubmitButton = () => {
   const nodes = useStore((state) => state.nodes);
   const edges = useStore((state) => state.edges);
-  const [modalState, setModalState] = useState(null); // 'success_dag' | 'success_cycle' | 'empty' | 'error' | null
-  const [modalData, setModalData] = useState({ numNodes: 0, numEdges: 0 });
+  const setModalState = useStore((state) => state.setModalState);
+  const setModalData = useStore((state) => state.setModalData);
 
   const handleSubmit = async (e) => {
     if (e) e.preventDefault();
@@ -64,14 +62,6 @@ export const SubmitButton = () => {
       <button type="button" onClick={handleSubmit} className="submit-btn">
         🚀 Run Pipeline
       </button>
-
-      {modalState && (
-        <PipelineModal
-          state={modalState}
-          data={modalData}
-          onClose={() => setModalState(null)}
-        />
-      )}
     </div>
   );
 };
