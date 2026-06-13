@@ -4,7 +4,7 @@ import { BaseNode } from './BaseNode';
 
 export const OutputNode = ({ id, data, selected }) => {
   const updateNodeField = useStore((state) => state.updateNodeField);
-  const [currName, setCurrName] = useState(data?.outputName || id.replace('customOutput-', 'output_'));
+  const [currName, setCurrName] = useState(data?.outputName || id.replace('customOutput-', 'Output '));
   const [outputType, setOutputType] = useState(data?.outputType || 'Text');
 
   const handleNameChange = (e) => {
@@ -31,16 +31,17 @@ export const OutputNode = ({ id, data, selected }) => {
       minHeight={80}
     >
       <div className="base-node-field">
-        <label className="base-node-label">Name</label>
+        <label className="base-node-label">Output Variable</label>
         <input
           type="text"
           value={currName}
           onChange={handleNameChange}
+          placeholder="e.g. final_response"
           className="base-node-input"
         />
       </div>
       <div className="base-node-field">
-        <label className="base-node-label">Type</label>
+        <label className="base-node-label">Format Type</label>
         <select
           value={outputType}
           onChange={handleTypeChange}

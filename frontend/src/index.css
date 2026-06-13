@@ -324,29 +324,32 @@ code {
   right: -5px !important;
 }
 
-/* Handle labels */
+/* Handle labels - floating outside the card */
 .handle-label {
   position: absolute;
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 600;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   pointer-events: none;
   white-space: nowrap;
-  background: var(--bg-handle-label);
-  padding: 1px 4px;
-  border-radius: 3px;
-  border: 1px solid var(--border-handle-label);
-  z-index: 4;
-  transition: background-color 0.3s, border-color 0.3s;
+  background: var(--bg-card);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  z-index: 10;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
 }
 
 .input-label {
-  left: 8px;
+  right: 100%;
+  margin-right: 10px;
   transform: translateY(-50%);
 }
 
 .output-label {
-  right: 8px;
+  left: 100%;
+  margin-left: 10px;
   transform: translateY(-50%);
 }
 

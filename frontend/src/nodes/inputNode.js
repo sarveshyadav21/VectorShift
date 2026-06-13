@@ -4,7 +4,7 @@ import { BaseNode } from './BaseNode';
 
 export const InputNode = ({ id, data, selected }) => {
   const updateNodeField = useStore((state) => state.updateNodeField);
-  const [currName, setCurrName] = useState(data?.inputName || id.replace('customInput-', 'input_'));
+  const [currName, setCurrName] = useState(data?.inputName || id.replace('customInput-', 'Input '));
   const [inputType, setInputType] = useState(data?.inputType || 'Text');
 
   const handleNameChange = (e) => {
@@ -31,16 +31,17 @@ export const InputNode = ({ id, data, selected }) => {
       minHeight={80}
     >
       <div className="base-node-field">
-        <label className="base-node-label">Name</label>
+        <label className="base-node-label">Field Name</label>
         <input
           type="text"
           value={currName}
           onChange={handleNameChange}
+          placeholder="e.g. user_query"
           className="base-node-input"
         />
       </div>
       <div className="base-node-field">
-        <label className="base-node-label">Type</label>
+        <label className="base-node-label">Field Type</label>
         <select
           value={inputType}
           onChange={handleTypeChange}

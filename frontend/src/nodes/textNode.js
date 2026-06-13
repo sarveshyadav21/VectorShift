@@ -7,7 +7,7 @@ export const TextNode = ({ id, data, selected }) => {
   const edges = useStore((state) => state.edges);
   const onEdgesChange = useStore((state) => state.onEdgesChange);
   
-  const [currText, setCurrText] = useState(data?.text || '{{input}}');
+  const [currText, setCurrText] = useState(data?.text || 'Hello {{name}}! Welcome to the builder.');
   const [variables, setVariables] = useState([]);
   const [nodeDimensions, setNodeDimensions] = useState({ width: 220, minHeight: 100 });
   const textareaRef = useRef(null);
@@ -90,11 +90,12 @@ export const TextNode = ({ id, data, selected }) => {
       minHeight={nodeDimensions.minHeight}
     >
       <div className="base-node-field" style={{ flexGrow: 1 }}>
-        <label className="base-node-label">Text</label>
+        <label className="base-node-label">Text Template (Use {"{{var}}"} for inputs)</label>
         <textarea
           ref={textareaRef}
           value={currText}
           onChange={handleTextChange}
+          placeholder="Type here. Use {{variable_name}} to add inputs dynamically..."
           className="base-node-textarea"
           style={{ overflow: 'hidden' }}
         />
