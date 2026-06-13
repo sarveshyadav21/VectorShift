@@ -21,6 +21,7 @@ export const ApiNode = ({ id, data, selected }) => {
 
   return (
     <BaseNode
+      id={id}
       title="API Request"
       headerColor="#2563eb"
       selected={selected}

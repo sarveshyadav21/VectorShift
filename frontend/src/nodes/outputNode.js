@@ -21,6 +21,7 @@ export const OutputNode = ({ id, data, selected }) => {
 
   return (
     <BaseNode
+      id={id}
       title="Output"
       headerColor="#f43f5e"
       selected={selected}

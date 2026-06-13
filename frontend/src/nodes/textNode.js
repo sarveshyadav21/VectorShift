@@ -80,6 +80,7 @@ export const TextNode = ({ id, data, selected }) => {
 
   return (
     <BaseNode
+      id={id}
       title="Text"
       headerColor="#ec4899"
       selected={selected}

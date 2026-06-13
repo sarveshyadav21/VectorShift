@@ -14,6 +14,7 @@ export const TransformNode = ({ id, data, selected }) => {
 
   return (
     <BaseNode
+      id={id}
       title="Transform"
       headerColor="#14b8a6"
       selected={selected}

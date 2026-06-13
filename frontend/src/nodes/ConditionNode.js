@@ -14,6 +14,7 @@ export const ConditionNode = ({ id, data, selected }) => {
 
   return (
     <BaseNode
+      id={id}
       title="Condition (If/Else)"
       headerColor="#7c3aed"
       selected={selected}

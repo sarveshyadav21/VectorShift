@@ -21,6 +21,7 @@ export const DatabaseNode = ({ id, data, selected }) => {
 
   return (
     <BaseNode
+      id={id}
       title="Database"
       headerColor="#10b981"
       selected={selected}

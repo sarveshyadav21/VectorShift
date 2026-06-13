@@ -21,6 +21,7 @@ export const EmailNode = ({ id, data, selected }) => {
 
   return (
     <BaseNode
+      id={id}
       title="Send Email"
       headerColor="#f97316"
       selected={selected}

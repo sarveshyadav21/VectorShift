@@ -1,12 +1,24 @@
 // toolbar.js
 
+import { useStore } from './store';
 import { DraggableNode } from './draggableNode';
 
 export const PipelineToolbar = () => {
+  const theme = useStore((state) => state.theme);
+  const toggleTheme = useStore((state) => state.toggleTheme);
+
   return (
     <div className="toolbar-container">
       <div className="toolbar-title-bar">
         <span className="toolbar-app-name">VectorShift Workflow Builder</span>
+        <button
+          type="button"
+          className="theme-toggle-btn"
+          onClick={toggleTheme}
+          title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+        >
+          {theme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode'}
+        </button>
       </div>
 
       <div className="toolbar-groups">

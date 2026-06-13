@@ -40,6 +40,7 @@ const selector = (state) => ({
   onNodesChange: state.onNodesChange,
   onEdgesChange: state.onEdgesChange,
   onConnect: state.onConnect,
+  theme: state.theme,
 });
 
 export const PipelineUI = () => {
@@ -52,7 +53,8 @@ export const PipelineUI = () => {
       addNode,
       onNodesChange,
       onEdgesChange,
-      onConnect
+      onConnect,
+      theme
     } = useStore(selector, shallow);
 
     const getInitNodeData = (nodeID, type) => {
@@ -114,7 +116,7 @@ export const PipelineUI = () => {
                 snapGrid={[gridSize, gridSize]}
                 connectionLineType='smoothstep'
             >
-                <Background color="#aaa" gap={gridSize} />
+                <Background color={theme === 'light' ? '#aaa' : '#334155'} gap={gridSize} />
                 <Controls />
                 <MiniMap />
             </ReactFlow>

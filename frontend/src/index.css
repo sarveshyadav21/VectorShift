@@ -1,6 +1,47 @@
 /* index.css */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
+/* Dynamic Theme Variable Declaration */
+:root {
+  --bg-app: #f8fafc;
+  --bg-card: #ffffff;
+  --border-color: #cbd5e1;
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --bg-input: #f8fafc;
+  --border-input: #cbd5e1;
+  --shadow-node: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+  --shadow-node-hover: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.08);
+  --bg-toolbar: rgba(255, 255, 255, 0.85);
+  --bg-handle-label: #f8fafc;
+  --border-handle-label: #e2e8f0;
+  --reactflow-grid: #aaa;
+  --bg-minimap: #ffffff;
+  --text-toolbar-btn: #334155;
+  --border-toolbar-btn: #e2e8f0;
+  --bg-toolbar-btn: #ffffff;
+}
+
+[data-theme="dark"] {
+  --bg-app: #0b0f19;
+  --bg-card: #151c2c;
+  --border-color: #243048;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --bg-input: #0b0f19;
+  --border-input: #243048;
+  --shadow-node: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+  --shadow-node-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.45), 0 10px 10px -5px rgba(0, 0, 0, 0.45);
+  --bg-toolbar: rgba(21, 28, 44, 0.85);
+  --bg-handle-label: #151c2c;
+  --border-handle-label: #243048;
+  --reactflow-grid: #334155;
+  --bg-minimap: #151c2c;
+  --text-toolbar-btn: #cbd5e1;
+  --border-toolbar-btn: #243048;
+  --bg-toolbar-btn: #1a2336;
+}
+
 body {
   margin: 0;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -8,8 +49,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f8fafc;
-  color: #0f172a;
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 code {
@@ -24,20 +66,23 @@ code {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+  background-color: var(--bg-app);
+  transition: background-color 0.3s ease;
 }
 
 /* Toolbar styling */
 .toolbar-container {
-  background: rgba(255, 255, 255, 0.85);
+  background: var(--bg-toolbar);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid var(--border-color);
   padding: 14px 24px;
   display: flex;
   flex-direction: column;
   gap: 12px;
   z-index: 10;
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.02), 0 2px 4px -2px rgb(0 0 0 / 0.02);
+  transition: all 0.3s ease;
 }
 
 .toolbar-title-bar {
@@ -47,17 +92,40 @@ code {
 }
 
 .toolbar-app-name {
-  font-size: 16px;
-  font-weight: 700;
-  color: #3b82f6;
-  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  font-size: 18px;
+  font-weight: 750;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  letter-spacing: -0.02em;
+}
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+  background-color: var(--bg-toolbar-btn);
+  border: 1px solid var(--border-toolbar-btn);
+  color: var(--text-primary);
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.theme-toggle-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-color: #3b82f6;
 }
 
 .toolbar-groups {
   display: flex;
-  gap: 24px;
+  gap: 32px;
   align-items: flex-start;
 }
 
@@ -71,8 +139,8 @@ code {
   font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
-  color: #64748b;
-  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  letter-spacing: 0.06em;
   margin-bottom: 2px;
 }
 
@@ -86,14 +154,14 @@ code {
   cursor: grab;
   padding: 6px 12px;
   border-radius: 6px;
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
+  background-color: var(--bg-toolbar-btn);
+  border: 1px solid var(--border-toolbar-btn);
   display: flex;
   align-items: center;
   gap: 6px;
   font-size: 12px;
   font-weight: 500;
-  color: #334155;
+  color: var(--text-primary);
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.03);
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   user-select: none;
@@ -101,9 +169,9 @@ code {
 
 .draggable-node:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.04), 0 4px 6px -4px rgb(0 0 0 / 0.04);
+  box-shadow: var(--shadow-node-hover);
   border-color: #3b82f6;
-  color: #2563eb;
+  color: #3b82f6;
 }
 
 .draggable-node:active {
@@ -119,19 +187,19 @@ code {
 
 /* Base Node Styling */
 .base-node {
-  background: #ffffff;
-  border: 1.5px solid #cbd5e1;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-color);
   border-radius: 10px;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+  box-shadow: var(--shadow-node);
   display: flex;
   flex-direction: column;
   overflow: visible;
   box-sizing: border-box;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.3s;
 }
 
 .base-node:hover {
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.08);
+  box-shadow: var(--shadow-node-hover);
 }
 
 .base-node.selected {
@@ -140,7 +208,7 @@ code {
 }
 
 .base-node-header {
-  padding: 6px 12px;
+  padding: 6px 10px 6px 12px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   color: white;
@@ -150,6 +218,28 @@ code {
   align-items: center;
   justify-content: space-between;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+}
+
+/* Delete button inside node header */
+.base-node-delete-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  line-height: 1;
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.base-node-delete-btn:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
 .base-node-body {
@@ -168,11 +258,11 @@ code {
 }
 
 .base-node-label {
-  font-size: 10px;
-  font-weight: 600;
-  color: #64748b;
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--text-secondary);
   text-transform: uppercase;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
 }
 
 .base-node-input,
@@ -181,13 +271,13 @@ code {
   width: 100%;
   padding: 5px 8px;
   border-radius: 6px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-input);
   font-size: 11px;
-  color: #0f172a;
+  color: var(--text-primary);
   outline: none;
-  background-color: #f8fafc;
+  background-color: var(--bg-input);
   box-sizing: border-box;
-  transition: all 0.2s;
+  transition: all 0.2s, background-color 0.3s;
   font-family: inherit;
 }
 
@@ -195,7 +285,7 @@ code {
 .base-node-select:focus,
 .base-node-textarea:focus {
   border-color: #3b82f6;
-  background-color: #ffffff;
+  background-color: var(--bg-card);
   box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.08);
 }
 
@@ -207,7 +297,7 @@ code {
 
 .base-node-desc {
   font-size: 11px;
-  color: #64748b;
+  color: var(--text-secondary);
   line-height: 1.4;
 }
 
@@ -215,7 +305,7 @@ code {
 .react-flow__handle {
   width: 8px !important;
   height: 8px !important;
-  background-color: #ffffff !important;
+  background-color: var(--bg-card) !important;
   border: 2px solid #3b82f6 !important;
   transition: transform 0.15s, background-color 0.15s;
   z-index: 5;
@@ -239,14 +329,15 @@ code {
   position: absolute;
   font-size: 9px;
   font-weight: 600;
-  color: #64748b;
+  color: var(--text-secondary);
   pointer-events: none;
   white-space: nowrap;
-  background: #f1f5f9;
+  background: var(--bg-handle-label);
   padding: 1px 4px;
   border-radius: 3px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-handle-label);
   z-index: 4;
+  transition: background-color 0.3s, border-color 0.3s;
 }
 
 .input-label {
@@ -259,6 +350,32 @@ code {
   transform: translateY(-50%);
 }
 
+/* ReactFlow Panel overrides for Dark Mode */
+.react-flow__minimap {
+  background-color: var(--bg-minimap) !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: var(--shadow-node) !important;
+}
+
+.react-flow__controls {
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  box-shadow: var(--shadow-node) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.react-flow__controls-button {
+  background: var(--bg-card) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  fill: var(--text-primary) !important;
+  transition: background-color 0.2s !important;
+}
+
+.react-flow__controls-button:hover {
+  background: var(--bg-app) !important;
+}
+
 /* Submit Button & Section */
 .submit-section {
   position: absolute;
@@ -269,15 +386,15 @@ code {
 }
 
 .submit-btn {
-  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
   color: #ffffff;
   font-size: 13px;
   font-weight: 600;
   padding: 10px 24px;
-  border-radius: 8px;
+  border-radius: 20px;
   border: none;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(59, 130, 246, 0.25);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
@@ -286,7 +403,7 @@ code {
 
 .submit-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 15px rgba(59, 130, 246, 0.35);
+  box-shadow: 0 6px 18px rgba(59, 130, 246, 0.45);
 }
 
 .submit-btn:active {
@@ -300,7 +417,7 @@ code {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(15, 23, 42, 0.4);
+  background-color: rgba(15, 23, 42, 0.5);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   display: flex;
@@ -311,19 +428,19 @@ code {
 }
 
 .modal-container {
-  background: #ffffff;
+  background: var(--bg-card);
   border-radius: 12px;
   width: 400px;
   max-width: 90%;
-  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  border: 1px solid #e2e8f0;
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.2), 0 8px 10px -6px rgb(0 0 0 / 0.2);
+  border: 1px solid var(--border-color);
   overflow: hidden;
   animation: slideUp 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .modal-header {
   padding: 14px 18px;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--border-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -332,14 +449,14 @@ code {
 .modal-title {
   font-size: 14px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text-primary);
 }
 
 .modal-close-btn {
   background: none;
   border: none;
   font-size: 20px;
-  color: #94a3b8;
+  color: var(--text-secondary);
   cursor: pointer;
   transition: color 0.15s;
   padding: 0;
@@ -347,7 +464,7 @@ code {
 }
 
 .modal-close-btn:hover {
-  color: #475569;
+  color: var(--text-primary);
 }
 
 .modal-body {
@@ -393,17 +510,17 @@ code {
   font-size: 13px;
   font-weight: 600;
   line-height: 1.4;
-  color: #1e293b;
+  color: var(--text-primary);
 }
 
 .modal-stats {
-  background-color: #f8fafc;
+  background-color: var(--bg-input);
   border-radius: 8px;
   padding: 12px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  border: 1px solid #f1f5f9;
+  border: 1px solid var(--border-color);
 }
 
 .stat-item {
@@ -415,26 +532,26 @@ code {
 .stat-label {
   font-size: 9px;
   font-weight: 700;
-  color: #64748b;
+  color: var(--text-secondary);
   text-transform: uppercase;
 }
 
 .stat-value {
   font-size: 16px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text-primary);
 }
 
 .modal-footer {
   padding: 10px 18px;
-  background-color: #f8fafc;
-  border-top: 1px solid #f1f5f9;
+  background-color: var(--bg-input);
+  border-top: 1px solid var(--border-color);
   display: flex;
   justify-content: flex-end;
 }
 
 .modal-btn {
-  background-color: #0f172a;
+  background-color: #3b82f6;
   color: #ffffff;
   padding: 7px 14px;
   border-radius: 6px;
@@ -446,7 +563,7 @@ code {
 }
 
 .modal-btn:hover {
-  background-color: #334155;
+  background-color: #2563eb;
 }
 
 @keyframes fadeIn {

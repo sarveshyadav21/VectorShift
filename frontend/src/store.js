@@ -51,4 +51,16 @@ export const useStore = create((set, get) => ({
         }),
       });
     },
+    deleteNode: (nodeId) => {
+      set({
+        nodes: get().nodes.filter((node) => node.id !== nodeId),
+        edges: get().edges.filter((edge) => edge.source !== nodeId && edge.target !== nodeId),
+      });
+    },
+    theme: 'light',
+    toggleTheme: () => {
+      const nextTheme = get().theme === 'light' ? 'dark' : 'light';
+      set({ theme: nextTheme });
+      document.documentElement.setAttribute('data-theme', nextTheme);
+    },
   }));

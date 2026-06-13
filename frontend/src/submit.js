@@ -10,7 +10,8 @@ export const SubmitButton = () => {
   const [modalState, setModalState] = useState(null); // 'success_dag' | 'success_cycle' | 'empty' | 'error' | null
   const [modalData, setModalData] = useState({ numNodes: 0, numEdges: 0 });
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    if (e) e.preventDefault();
     if (!nodes || nodes.length === 0) {
       setModalState('empty');
       return;
@@ -60,7 +61,7 @@ export const SubmitButton = () => {
 
   return (
     <div className="submit-section">
-      <button onClick={handleSubmit} className="submit-btn">
+      <button type="button" onClick={handleSubmit} className="submit-btn">
         🚀 Run Pipeline
       </button>
 

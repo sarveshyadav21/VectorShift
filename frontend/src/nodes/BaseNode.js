@@ -1,6 +1,8 @@
 import { Handle, Position } from 'reactflow';
+import { useStore } from '../store';
 
 export const BaseNode = ({
+  id,
   title,
   headerColor = '#2563eb',
   inputs = [],
@@ -10,6 +12,8 @@ export const BaseNode = ({
   minHeight = 80,
   selected = false,
 }) => {
+  const deleteNode = useStore((state) => state.deleteNode);
+
   return (
     <div
       className={`base-node ${selected ? 'selected' : ''}`}
@@ -24,6 +28,16 @@ export const BaseNode = ({
         style={{ backgroundColor: headerColor }}
       >
         <span className="base-node-title">{title}</span>
+        <button
+          className="base-node-delete-btn"
+          onClick={(e) => {
+            e.stopPropagation();
+            deleteNode(id);
+          }}
+          title="Delete Node"
+        >
+          &times;
+        </button>
       </div>
 
       {/* Node Content Body */}

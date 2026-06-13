@@ -21,6 +21,7 @@ export const InputNode = ({ id, data, selected }) => {
 
   return (
     <BaseNode
+      id={id}
       title="Input"
       headerColor="#6366f1"
       selected={selected}
