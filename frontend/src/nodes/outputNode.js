@@ -1,47 +1,54 @@
-// outputNode.js
-
 import { useState } from 'react';
-import { Handle, Position } from 'reactflow';
+import { useStore } from '../store';
+import { BaseNode } from './BaseNode';
 
-export const OutputNode = ({ id, data }) => {
+export const OutputNode = ({ id, data, selected }) => {
+  const updateNodeField = useStore((state) => state.updateNodeField);
   const [currName, setCurrName] = useState(data?.outputName || id.replace('customOutput-', 'output_'));
-  const [outputType, setOutputType] = useState(data.outputType || 'Text');
+  const [outputType, setOutputType] = useState(data?.outputType || 'Text');
 
   const handleNameChange = (e) => {
-    setCurrName(e.target.value);
+    const val = e.target.value;
+    setCurrName(val);
+    updateNodeField(id, 'outputName', val);
   };
 
   const handleTypeChange = (e) => {
-    setOutputType(e.target.value);
+    const val = e.target.value;
+    setOutputType(val);
+    updateNodeField(id, 'outputType', val);
   };
 
   return (
-    <div style={{width: 200, height: 80, border: '1px solid black'}}>
-      <Handle
-        type="target"
-        position={Position.Left}
-        id={`${id}-value`}
-      />
-      <div>
-        <span>Output</span>
+    <BaseNode
+      title="Output"
+      headerColor="#f43f5e"
+      selected={selected}
+      inputs={[{ id: `${id}-value`, label: 'Value' }]}
+      outputs={[]}
+      width={200}
+      minHeight={80}
+    >
+      <div className="base-node-field">
+        <label className="base-node-label">Name</label>
+        <input
+          type="text"
+          value={currName}
+          onChange={handleNameChange}
+          className="base-node-input"
+        />
       </div>
-      <div>
-        <label>
-          Name:
-          <input 
-            type="text" 
-            value={currName} 
-            onChange={handleNameChange} 
-          />
-        </label>
-        <label>
-          Type:
-          <select value={outputType} onChange={handleTypeChange}>
-            <option value="Text">Text</option>
-            <option value="File">Image</option>
-          </select>
-        </label>
+      <div className="base-node-field">
+        <label className="base-node-label">Type</label>
+        <select
+          value={outputType}
+          onChange={handleTypeChange}
+          className="base-node-select"
+        >
+          <option value="Text">Text</option>
+          <option value="File">Image</option>
+        </select>
       </div>
-    </div>
+    </BaseNode>
   );
-}
+};

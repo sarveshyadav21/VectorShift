@@ -10,6 +10,11 @@ import { InputNode } from './nodes/inputNode';
 import { LLMNode } from './nodes/llmNode';
 import { OutputNode } from './nodes/outputNode';
 import { TextNode } from './nodes/textNode';
+import { ApiNode } from './nodes/ApiNode';
+import { DatabaseNode } from './nodes/DatabaseNode';
+import { EmailNode } from './nodes/EmailNode';
+import { ConditionNode } from './nodes/ConditionNode';
+import { TransformNode } from './nodes/TransformNode';
 
 import 'reactflow/dist/style.css';
 
@@ -20,6 +25,11 @@ const nodeTypes = {
   llm: LLMNode,
   customOutput: OutputNode,
   text: TextNode,
+  api: ApiNode,
+  database: DatabaseNode,
+  email: EmailNode,
+  condition: ConditionNode,
+  transform: TransformNode,
 };
 
 const selector = (state) => ({
@@ -89,8 +99,7 @@ export const PipelineUI = () => {
     }, []);
 
     return (
-        <>
-        <div ref={reactFlowWrapper} style={{width: '100wv', height: '70vh'}}>
+        <div ref={reactFlowWrapper} className="canvas-container">
             <ReactFlow
                 nodes={nodes}
                 edges={edges}
@@ -110,6 +119,5 @@ export const PipelineUI = () => {
                 <MiniMap />
             </ReactFlow>
         </div>
-        </>
     )
 }
