@@ -28,7 +28,8 @@ export const SubmitButton = () => {
         })),
       };
 
-      const response = await fetch('http://localhost:8000/pipelines/parse', {
+      const baseUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${baseUrl}/pipelines/parse`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

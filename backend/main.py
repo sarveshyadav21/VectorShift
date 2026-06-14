@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Dict, Any
+import os
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 
@@ -68,3 +70,9 @@ def parse_pipeline(req: PipelineRequest):
         'num_edges': num_edges,
         'is_dag': is_dag
     }
+
+# Mount static React frontend build if it exists (for unified production deployment)
+frontend_build_path = os.path.join(os.path.dirname(__file__), "../frontend/build")
+if os.path.exists(frontend_build_path):
+    app.mount("/", StaticFiles(directory=frontend_build_path, html=True), name="static")
+
